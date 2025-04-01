@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diferencia de Tarifas</title>
+    <style>
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('https://t4.ftcdn.net/jpg/01/27/10/27/360_F_127102793_T3xjCOEUKV5vy3WgNMxpDRnEMSFFHh5b.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+        .container {
+            background: rgb(99, 222, 191);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+        input, button {
+            width: 90%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        /* Framed results styling */
+        #results {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: white;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        .result-item {
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        function calculateDifference() {
+            let oldTariff = document.getElementById("oldTariff").value;
+            let newTariff = document.getElementById("newTariff").value;
+            let totalHours = document.getElementById("totalHours").value;
+
+            google.script.run.withSuccessHandler(function(result) {
+                document.getElementById("results").innerHTML = `<div class='result-item'>${result}</div>`;
+            }).calculateDifference(oldTariff, newTariff, totalHours);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Calculadora de <br> diferencia de tarifas</h2>
+        <label for="oldTariff">Tarifa Antigua (€ por hora):</label>
+        <input type="number" id="oldTariff" placeholder="Ej. 15.49">
+        
+        <label for="newTariff">Tarifa Nueva (€ por hora):</label>
+        <input type="number" id="newTariff" placeholder="Ej. 15.72">
+        
+        <label for="totalHours">Total de Horas Trabajadas:</label>
+        <input type="number" id="totalHours" placeholder="Ej. 160">
+        
+        <button onclick="calculateDifference()">Calcular</button>
+        
+        <div id="results"></div>
+
+        <footer style="font-size: 12px; color: grey; text-align: center; margin-top: 20px;">
+            by Marco Cot, 2025 <br><br> Disclaimer: this is not a corporate app <br> Use for guidance only
+        </footer>
+    </div>
+</body>
+</html>
